@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body style="
+    background-color: #222;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+">
+    <h1>Enter your name</h1>
+    <p>First names only</p>
+    <form id="nameForm" style="
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    ">
+        <input type="text" id="name" name="name" required style="
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            margin-right: 10px;
+            background-color: #333;
+            color: #fff;
+        ">
+        <button type="submit" style="
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        ">Check</button>
+    </form>
+    <div id="result" style="
+        margin-top: 20px;
+        color: #fff;
+    "></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/handlebars/dist/handlebars.min.js"></script>
+    <script id="template" type="text/x-handlebars-template">
+        <p>{{{result}}}</p>
+    </script>
+
+    <script>
+        
+    var responses = {
+    'noah': 'Noah-"I swear girls like me Im not delusional',
+    'kya': '#$@$#.',
+    'kyia': 'Ahh, the short one.',
+    'kiya': 'Ahh, the short one.',
+    'kiya huhn': 'Ahh, the short one.',
+    'caden': 'You just stupid',
+    'isaiah': "unfortunately you can't insult perfection",
+    'isabella': "Sorry but i belive it is actually spelled Jezebel",
+    'mathew': "HOW how is ONE MAN so unbelivably WHINY",
+    'garrett': "I aißnt gay just $20 richer",
+    'justin': "Unfortunatly you can't insult perfection",
+    'josef': "🚫 Oops! Looks like our chat filters are getting a tune-up to keep things family-friendly. Thanks for bearing with us!",
+    'kathryn': "🚫 Oops! Looks like our chat filters are getting a tune-up to keep things family-friendly. Thanks for bearing with us",
+    'brielle': "Just a slightly shorter Raelyn",
+    'raelyn': "Just a slightly taller Brielle",
+    'keira': "I have nothing against the Orths",
+    'daniel': "There is no news for silksong today (that should ruin his day)",
+    'doney': "There is no new for silksong today (that should ruin his day)",
+    'braxton': "I'll leave you alone Brynn bullies you enough"
+};
+
+document.getElementById('nameForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    var name = document.getElementById('name').value.toLowerCase();
+    var defaultResponse = `<a href="mailto:IsaiahGrahamAlexander@gmail.com?subject=Hi &body=My name is _____ and im stupid" style="color: red;">Email me an insult and I'll add it to your name</a>`;
+
+    // Check if the name exists in the responses object, otherwise use the default response
+    var response = responses[name] || defaultResponse;
+
+    var source = document.getElementById('template').innerHTML;
+    var template = Handlebars.compile(source);
+    var context = { result: response };
+    var html = template(context);
+
+    document.getElementById('result').innerHTML = html;
+});
+
+    </script>
+</body>
+</html>
